@@ -492,7 +492,7 @@ class MyEditState extends State<MyEdit> {
     } else {
       AlertDialog alert = AlertDialog(
         content: Container(
-          child: Text("Perdin Berhasil Diedit"),
+          child: Text("Perdin Gagal Diedit"),
         ),
         actions: [
           TextButton(
