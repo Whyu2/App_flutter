@@ -87,6 +87,7 @@ class MyEditState extends State<MyEdit> {
 
   final formatter = NumberFormat.simpleCurrency(locale: 'id_ID');
 
+
   @override
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)!.settings.arguments as List<dynamic>;
@@ -96,6 +97,7 @@ class MyEditState extends State<MyEdit> {
     datepulangController.text = args[7];
 
     maskudController.text = args[8];
+   
     id_perdin = args[9];
 
     dataKota2(args[5]);
@@ -170,13 +172,7 @@ class MyEditState extends State<MyEdit> {
                   )
                 ],
               ),
-              // Text(
-              //   "Edit Perdin",
-              //   style: TextStyle(
-              //     fontSize: 20,
-              //     fontWeight: FontWeight.bold,
-              //   ),
-              // ),
+
               SizedBox(height: 20),
 
               //Data Pegawai
@@ -373,7 +369,7 @@ class MyEditState extends State<MyEdit> {
               //Data Maksud
               new TextFormField(
                 controller: maskudController,
-               
+
                 minLines:
                     4, // any number you need (It works as the rows for the textarea)
                 textInputAction: TextInputAction.done,

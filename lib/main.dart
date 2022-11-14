@@ -49,7 +49,7 @@ class MyLoginFormState extends State<MyLoginForm> {
               child: Column(children: [
                 SizedBox(height: 50),
                 Text(
-                  "App",
+                  "App Editttt",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 40,
