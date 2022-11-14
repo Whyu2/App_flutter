@@ -33,10 +33,13 @@ class MyEditState extends State<MyEdit> {
 
   var id_perdin,
       nrp_pegawai,
+      nama_pegawai,
       id_kota_asal,
+      kota_asal,
       lat_kota_asal,
       lon_kota_asal,
       id_kota_tujuan,
+      kota_tujuan,
       lat_kota_tujuan,
       lon_kota_tujuan,
       tglberangkat,
@@ -54,55 +57,61 @@ class MyEditState extends State<MyEdit> {
 
   localData() async {
     SharedPreferences localStorage = await SharedPreferences.getInstance();
-    var id = localStorage.getString('id');
+    var val_id_post_user = localStorage.getString('id');
+    var val_nrp_nama = localStorage.getString('nrp_pegawai');
+    var val_nama_pegawai = localStorage.getString('nama_pegawai');
+    var val_lokasi_asal = localStorage.getString('lokasi_asal');
+    var val_id_lokasi_asal = localStorage.getString('lokasi_id_asal');
+    var val_lokasi_tujuan = localStorage.getString('lokasi_tujuan');
+    var val_id_lokasi_tujuan = localStorage.getString('lokasi_id_tujuan');
+    var val_tanggal_berangkat = localStorage.getString('tanggal_berangkat');
+    var val_tanggal_pulang = localStorage.getString('tanggal_pulang');
+    var val_maksud = localStorage.getString('maksud');
+    var val_id_perdin = localStorage.getString('id_perdin');
     setState(() {
-      post_user_id = id;
+      id_perdin = val_id_perdin;
+      nrp_pegawai = val_nrp_nama;
+      nama_pegawai = val_nama_pegawai;
+      id_kota_asal = val_id_lokasi_asal;
+      kota_asal = val_lokasi_asal;
+      id_kota_tujuan = val_id_lokasi_tujuan;
+      kota_tujuan = val_lokasi_tujuan;
+      datepergiController.text = val_tanggal_berangkat;
+      datepulangController.text = val_tanggal_pulang;
+      maskudController.text = val_maksud;
+      post_user_id = val_id_post_user;
     });
   }
 
-  void dataKota1(id) async {
-    var response = await Network().getKota_byId('/master/lokasi/' + id);
-    if (response.statusCode != 200) {
-      print(response.statusCode);
-    }
-    var data = jsonDecode(response.body);
-    final pref = await SharedPreferences.getInstance();
-    await pref.setString('lokasi_id_asal', data["id"]);
-    await pref.setString('lon1', data["lon"]);
-    await pref.setString('lat1', data["lat"]);
-  }
+  // dataKota1(id) async {
+  //   var response = await Network().getKota_byId('/master/lokasi/' + id);
+  //   if (response.statusCode != 200) {
+  //     print(response.statusCode);
+  //   }
+  //   var data = jsonDecode(response.body);
+  //   final pref = await SharedPreferences.getInstance();
+  //   await pref.setString('lokasi_id_asal', data["id"]);
+  //   await pref.setString('lon1', data["lon"]);
+  //   await pref.setString('lat1', data["lat"]);
+  // }
 
-  void dataKota2(id) async {
-    var response = await Network().getKota_byId('/master/lokasi/' + id);
+  // dataKota2(id) async {
+  //   var response = await Network().getKota_byId('/master/lokasi/' + id);
 
-    if (response.statusCode != 200) {
-      print(response.statusCode);
-    }
-    var data2 = jsonDecode(response.body);
-    final pref = await SharedPreferences.getInstance();
-    await pref.setString('lokasi_id_tujuan', data2["id"]);
-    await pref.setString('lon2', data2["lon"]);
-    await pref.setString('lat2', data2["lat"]);
-  }
+  //   if (response.statusCode != 200) {
+  //     print(response.statusCode);
+  //   }
+  //   var data2 = jsonDecode(response.body);
+  //   final pref = await SharedPreferences.getInstance();
+  //   await pref.setString('lokasi_id_tujuan', data2["id"]);
+  //   await pref.setString('lon2', data2["lon"]);
+  //   await pref.setString('lat2', data2["lat"]);
+  // }
 
-  final formatter = NumberFormat.simpleCurrency(locale: 'id_ID');
-
+  // final formatter = NumberFormat.simpleCurrency(locale: 'id_ID');
 
   @override
   Widget build(BuildContext context) {
-    final args = ModalRoute.of(context)!.settings.arguments as List<dynamic>;
-
-    nrp_pegawai = args[1];
-    datepergiController.text = args[6];
-    datepulangController.text = args[7];
-
-    maskudController.text = args[8];
-   
-    id_perdin = args[9];
-
-    dataKota2(args[5]);
-    dataKota1(args[3]);
-
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
@@ -179,9 +188,6 @@ class MyEditState extends State<MyEdit> {
               //form username
               DropdownSearch<dynamic>(
                 mode: Mode.MENU,
-                label: "Pilih Pegawai",
-                hint: "Daftar Pegawai",
-
                 showSearchBox: true,
                 onFind: (text) async {
                   var response =
@@ -194,9 +200,7 @@ class MyEditState extends State<MyEdit> {
                 },
                 // onChanged: (value) => print(value['nrp']),
                 onChanged: (value) => nrp_pegawai = value['nrp'],
-                selectedItem: {
-                  "nama": args[0],
-                },
+                selectedItem: {"nama": nama_pegawai},
                 itemAsString: ((item) => item['nama']),
               ),
               SizedBox(height: 10),
@@ -235,8 +239,9 @@ class MyEditState extends State<MyEdit> {
                 popupItemBuilder: (context, item, isSelected) => ListTile(
                   title: Text(item.nama),
                 ),
-                dropdownBuilder: (context, selectedItem) =>
-                    Text(selectedItem?.nama ?? args[2]),
+                dropdownBuilder: (context, selectedItem) => Text(
+                  selectedItem?.nama ?? kota_asal,
+                ),
 
                 onChanged: (value) {
                   setState(() {
@@ -282,8 +287,9 @@ class MyEditState extends State<MyEdit> {
                 popupItemBuilder: (context, item, isSelected) => ListTile(
                   title: Text(item.nama),
                 ),
-                dropdownBuilder: (context, selectedItem) =>
-                    Text(selectedItem?.nama ?? args[4]),
+                dropdownBuilder: (context, selectedItem) => Text(
+                  selectedItem?.nama ?? kota_tujuan,
+                ),
                 onChanged: (value) {
                   setState(() {
                     id_kota_tujuan = value?.id;
@@ -402,17 +408,27 @@ class MyEditState extends State<MyEdit> {
     //hITUNG jARAKKK
 
     if (lat_kota_asal == null) {
-      final prefs = await SharedPreferences.getInstance();
-      lat_kota_asal = prefs.getString('lat1');
-      lon_kota_asal = prefs.getString('lon1');
-      id_kota_asal = prefs.getString('lokasi_id_asal');
+      var response =
+          await Network().getKota_byId('/master/lokasi/' + id_kota_asal);
+      if (response.statusCode != 200) {
+        print(response.statusCode);
+      }
+      var data = jsonDecode(response.body);
+      lat_kota_asal = data["lat"];
+      lon_kota_asal = data["lon"];
+      id_kota_asal = data["id"];
     }
 
     if (lat_kota_tujuan == null) {
-      final prefs = await SharedPreferences.getInstance();
-      lat_kota_tujuan = prefs.getString('lat2');
-      lon_kota_tujuan = prefs.getString('lon2');
-      id_kota_tujuan = prefs.getString('lokasi_id_tujuan');
+      var response =
+          await Network().getKota_byId('/master/lokasi/' + id_kota_tujuan);
+      if (response.statusCode != 200) {
+        print(response.statusCode);
+      }
+      var data2 = jsonDecode(response.body);
+      lat_kota_tujuan = data2["lat"];
+      lon_kota_tujuan = data2["lon"];
+      id_kota_tujuan = data2["id"];
     }
 
     var lat_asal = double.parse(lat_kota_asal);
@@ -469,7 +485,16 @@ class MyEditState extends State<MyEdit> {
       'maksud': maksud,
       'uang_saku': tot_uangsaku,
     };
-
+    // print("nrp " + nrp_pegawai);
+    // print("lokasi_id_asal " + id_kota_asal);
+    // print("lokasi_id_tujuan " + id_kota_tujuan);
+    // print("jarak " + jarak_km);
+    // print("tanggal_berangkat " + tglberangkat);
+    // print("tanggal_pulang " + tglpulang);
+    // print("lama_hari " + durasi_perdin);
+    // print("maskud " + maksud);
+    // print("uang_saku " + tot_uangsaku);
+    // print("created_by_user_id " + post_user_id);
     var response = await Network().editPerdin(data, '/trx/perdin/' + id_perdin);
 
     if (response.statusCode == 200) {
@@ -505,12 +530,12 @@ class MyEditState extends State<MyEdit> {
 
   void kembali() async {
     SharedPreferences localStorage = await SharedPreferences.getInstance();
-    localStorage.remove('lat1');
-    localStorage.remove('lon1');
-    localStorage.remove('lon2');
-    localStorage.remove('lat2');
-    localStorage.remove('lokasi_id_asal');
-    localStorage.remove('lokasi_id_tujuan');
+    // localStorage.remove('lat1');
+    // localStorage.remove('lon1');
+    // localStorage.remove('lon2');
+    // localStorage.remove('lat2');
+    // localStorage.remove('lokasi_id_asal');
+    // localStorage.remove('lokasi_id_tujuan');
     Navigator.pushReplacement(
         context, MaterialPageRoute(builder: (context) => MyHome()));
   }

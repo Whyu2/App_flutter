@@ -216,9 +216,7 @@ class MyHomeState extends State<MyHome> {
                           ),
                           child: Text(
                             _get[index]['tanggal_berangkat'],
-                            style: TextStyle(
-                           
-                            ),
+                            style: TextStyle(),
                           ),
                         ),
                         Container(
@@ -230,9 +228,7 @@ class MyHomeState extends State<MyHome> {
                           ),
                           child: Text(
                             "-->",
-                            style: TextStyle(
-                           
-                            ),
+                            style: TextStyle(),
                           ),
                         ),
                         Container(
@@ -243,9 +239,7 @@ class MyHomeState extends State<MyHome> {
                           ),
                           child: Text(
                             _get[index]['tanggal_pulang'],
-                            style: TextStyle(
-                            
-                            ),
+                            style: TextStyle(),
                           ),
                         ),
                       ],
@@ -358,20 +352,37 @@ class MyHomeState extends State<MyHome> {
                             backgroundColor: Color.fromARGB(255, 0, 67, 249),
                             child: IconButton(
                                 color: Colors.white,
-                                onPressed: () => Navigator.of(context)
-                                        .popAndPushNamed('/editPerdin',
-                                            arguments: [
-                                          _get[index]['nama_pegawai'],
-                                          _get[index]['nrp'],
-                                          _get[index]['lokasi_asal'],
-                                          _get[index]['lokasi_id_asal'],
-                                          _get[index]['lokasi_tujuan'],
-                                          _get[index]['lokasi_id_tujuan'],
-                                          _get[index]['tanggal_berangkat'],
-                                          _get[index]['tanggal_pulang'],
-                                          _get[index]['maksud'],
-                                          _get[index]['id'],
-                                        ]),
+                                onPressed: () async {
+                                  SharedPreferences localStorage =
+                                      await SharedPreferences.getInstance();
+                                  // localStorage.setString('token', json.encode(body['token']));
+                                  localStorage.setString(
+                                    'nrp_pegawai',
+                                    _get[index]['nrp'],
+                                  );
+                                  localStorage.setString('lokasi_asal',
+                                      _get[index]['lokasi_asal']);
+                                         localStorage.setString('nama_pegawai',
+                                      _get[index]['nama_pegawai']);
+                                  localStorage.setString('lokasi_id_asal',
+                                      _get[index]['lokasi_id_asal']);
+                                  localStorage.setString('lokasi_tujuan',
+                                      _get[index]['lokasi_tujuan']);
+                                  localStorage.setString('lokasi_id_tujuan',
+                                      _get[index]['lokasi_id_tujuan']);
+                                  localStorage.setString('tanggal_berangkat',
+                                      _get[index]['tanggal_berangkat']);
+                                  localStorage.setString('tanggal_pulang',
+                                      _get[index]['tanggal_pulang']);
+                                  localStorage.setString(
+                                      'maksud', _get[index]['maksud']);
+                                  localStorage.setString(
+                                      'id_perdin', _get[index]['id']);
+                                  Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => MyEdit()));
+                                },
                                 icon: const Icon(Icons.edit))),
                       ),
                       Container(
