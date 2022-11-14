@@ -95,9 +95,9 @@ class MyHomeState extends State<MyHome> {
                           child: Text(
                             _get[index]['nama_pegawai'],
                             style: TextStyle(
-                              fontSize: 30,
-                              fontWeight: FontWeight.bold,
-                            ),
+                                fontSize: 30,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black),
                           ),
                         ),
                       ],
@@ -107,8 +107,7 @@ class MyHomeState extends State<MyHome> {
                         Container(
                           margin: const EdgeInsets.only(left: 10.0, top: 5),
                           child: Text(
-                            "NIP Pegawai : " +
-                            _get[index]['nip_pegawai'],
+                            "NIP Pegawai : " + _get[index]['nip_pegawai'],
                             style: TextStyle(
                               fontSize: 10,
                             ),
@@ -158,8 +157,9 @@ class MyHomeState extends State<MyHome> {
                                     child: Icon(Icons.location_city, size: 20),
                                   ),
                                   TextSpan(
-                                    text: " Kota Tujuan : " +
+                                    text: " Kota Asal : " +
                                         _get[index]['lokasi_asal'],
+                                    style: TextStyle(color: Colors.black),
                                   ),
                                 ],
                               ),
@@ -180,9 +180,9 @@ class MyHomeState extends State<MyHome> {
                                     child: Icon(Icons.location_city, size: 20),
                                   ),
                                   TextSpan(
-                                    text: " Kota Tujuan : " +
-                                        _get[index]['lokasi_tujuan'],
-                                  ),
+                                      text: " Kota Tujuan : " +
+                                          _get[index]['lokasi_tujuan'],
+                                      style: TextStyle(color: Colors.black)),
                                 ],
                               ),
                             ))
@@ -201,7 +201,10 @@ class MyHomeState extends State<MyHome> {
                                   WidgetSpan(
                                     child: Icon(Icons.date_range, size: 20),
                                   ),
-                                  TextSpan(text: " Tanggal : "),
+                                  TextSpan(
+                                    text: " Tanggal : ",
+                                    style: TextStyle(color: Colors.black),
+                                  ),
                                 ],
                               ),
                             )),
@@ -214,7 +217,7 @@ class MyHomeState extends State<MyHome> {
                           child: Text(
                             _get[index]['tanggal_berangkat'],
                             style: TextStyle(
-                              fontSize: 15,
+                           
                             ),
                           ),
                         ),
@@ -228,7 +231,7 @@ class MyHomeState extends State<MyHome> {
                           child: Text(
                             "-->",
                             style: TextStyle(
-                              fontSize: 15,
+                           
                             ),
                           ),
                         ),
@@ -241,7 +244,7 @@ class MyHomeState extends State<MyHome> {
                           child: Text(
                             _get[index]['tanggal_pulang'],
                             style: TextStyle(
-                              fontSize: 15,
+                            
                             ),
                           ),
                         ),
@@ -261,10 +264,10 @@ class MyHomeState extends State<MyHome> {
                                     child: Icon(Icons.lock_clock, size: 20),
                                   ),
                                   TextSpan(
-                                    text: " Lama Hari : " +
-                                        _get[index]['lama_hari'] +
-                                        " Hari",
-                                  ),
+                                      text: " Lama Hari : " +
+                                          _get[index]['lama_hari'] +
+                                          " Hari",
+                                      style: TextStyle(color: Colors.black)),
                                 ],
                               ),
                             ))
@@ -284,10 +287,10 @@ class MyHomeState extends State<MyHome> {
                                     child: Icon(Icons.money, size: 20),
                                   ),
                                   TextSpan(
-                                    text: " Uang Saku : " +
-                                        formatter.format(int.parse(
-                                            _get[index]['uang_saku'])),
-                                  ),
+                                      text: " Uang Saku : " +
+                                          formatter.format(int.parse(
+                                              _get[index]['uang_saku'])),
+                                      style: TextStyle(color: Colors.black)),
                                 ],
                               ),
                             ))
@@ -300,8 +303,7 @@ class MyHomeState extends State<MyHome> {
                               left: 10.0,
                               bottom: 10.0,
                             ),
-                            child: 
-                            RichText(
+                            child: RichText(
                               text: TextSpan(
                                 children: [
                                   WidgetSpan(
@@ -311,13 +313,13 @@ class MyHomeState extends State<MyHome> {
                                       text: " Jarak : " +
                                           _get[index]['jarak']?.replaceFirst(
                                               RegExp(r"\.[^]*"), "") +
-                                          " KM"
+                                          " KM",
+                                      style: TextStyle(color: Colors.black)
                                       //         " KM",
                                       ),
                                 ],
                               ),
-                            )
-                            )
+                            ))
                       ],
                     ),
                     Row(
@@ -335,7 +337,9 @@ class MyHomeState extends State<MyHome> {
                                         size: 20),
                                   ),
                                   TextSpan(
-                                      text: " Maksud : " + _get[index]['maksud']
+                                      text:
+                                          " Maksud : " + _get[index]['maksud'],
+                                      style: TextStyle(color: Colors.black)
                                       //         " KM",
                                       ),
                                 ],
@@ -406,7 +410,6 @@ class MyHomeState extends State<MyHome> {
                                 icon: const Icon(Icons.delete))),
                       ),
                     ]),
-             
                   ],
                 ),
               );

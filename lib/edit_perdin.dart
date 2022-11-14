@@ -15,19 +15,19 @@ import 'dart:math' as Math;
 
 class MyEdit extends StatefulWidget {
   const MyEdit({super.key});
+  //  const MyEdit({Key? key}) : super(key: key);
   @override
   MyEditState createState() => MyEditState();
 }
 
 class MyEditState extends State<MyEdit> {
-  final _scaffoldKey = GlobalKey<ScaffoldState>();
-  final _formKey = GlobalKey<FormState>();
+  static GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
 
   late TextEditingController datepergiController = TextEditingController();
   late TextEditingController datepulangController = TextEditingController();
-  final pegawaiController = TextEditingController();
-  final kotaasalController = TextEditingController();
-  final kotatujuanController = TextEditingController();
+  final TextEditingController pegawaiController = TextEditingController();
+  final TextEditingController kotaasalController = TextEditingController();
+  final TextEditingController kotatujuanController = TextEditingController();
   // final maskudController = TextEditingController();
   late TextEditingController maskudController = TextEditingController();
 
@@ -49,7 +49,6 @@ class MyEditState extends State<MyEdit> {
     super.initState();
     datepergiController.text = '';
     datepulangController.text = '';
-    maskudController.text = '';
     localData();
   }
 
@@ -87,6 +86,7 @@ class MyEditState extends State<MyEdit> {
   }
 
   final formatter = NumberFormat.simpleCurrency(locale: 'id_ID');
+
   @override
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)!.settings.arguments as List<dynamic>;
@@ -104,7 +104,6 @@ class MyEditState extends State<MyEdit> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        key: _scaffoldKey,
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
           title: Row(
@@ -372,11 +371,12 @@ class MyEditState extends State<MyEdit> {
               ),
               SizedBox(height: 10),
               //Data Maksud
-              TextFormField(
+              new TextFormField(
                 controller: maskudController,
-
+               
                 minLines:
-                    6, // any number you need (It works as the rows for the textarea)
+                    4, // any number you need (It works as the rows for the textarea)
+                textInputAction: TextInputAction.done,
                 keyboardType: TextInputType.multiline,
                 maxLines: null,
                 decoration: new InputDecoration(

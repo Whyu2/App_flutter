@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:first_1/network/api.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-
 void main() {
   runApp(MyApp());
 }
@@ -17,6 +16,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
+        resizeToAvoidBottomInset: false,
         body: const MyLoginForm(),
       ),
     );
