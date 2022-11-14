@@ -13,7 +13,6 @@ import 'package:http/http.dart' as http;
 import 'dart:math';
 import 'dart:math' as Math;
 
-
 class MyPerdinForm extends StatefulWidget {
   const MyPerdinForm({super.key});
 
@@ -95,7 +94,7 @@ class MyPerdinFormState extends State<MyPerdinForm> {
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Color.fromARGB(255, 0, 67, 249),
-                    onPrimary: Colors.white,
+                        onPrimary: Colors.white,
                         minimumSize: Size(50, 50), //////// HERE
                       ),
                       onPressed: () {
@@ -104,10 +103,21 @@ class MyPerdinFormState extends State<MyPerdinForm> {
                         }
                         // Provider.of(context, listen: false);
                       },
-                      child: Text(
-                        'Tambah',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
+                      child: RichText(
+                        text: TextSpan(
+                          children: [
+                            WidgetSpan(
+                              child: Icon(Icons.save_alt, size: 20),
+                            ),
+                            TextSpan(
+                              text: " Tambah",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                 color: Color.fromARGB(255, 255, 255, 255),
+                              ),
+                              //         " KM",
+                            ),
+                          ],
                         ),
                       ),
                     ),

@@ -13,7 +13,6 @@ import 'package:http/http.dart' as http;
 import 'dart:math';
 import 'dart:math' as Math;
 
-
 class MyEdit extends StatefulWidget {
   const MyEdit({super.key});
   @override
@@ -87,6 +86,7 @@ class MyEditState extends State<MyEdit> {
     await pref.setString('lat2', data2["lat"]);
   }
 
+  final formatter = NumberFormat.simpleCurrency(locale: 'id_ID');
   @override
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)!.settings.arguments as List<dynamic>;
@@ -140,8 +140,8 @@ class MyEditState extends State<MyEdit> {
                   Container(
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                           backgroundColor: Color.fromARGB(255, 0, 67, 249),
-                    onPrimary: Colors.white,
+                        backgroundColor: Color.fromARGB(255, 0, 67, 249),
+                        onPrimary: Colors.white,
                         minimumSize: Size(50, 50), //////// HERE
                       ),
                       onPressed: () {
@@ -150,10 +150,21 @@ class MyEditState extends State<MyEdit> {
                         }
                         // Provider.of(context, listen: false);
                       },
-                      child: Text(
-                        'Simpan',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
+                      child: RichText(
+                        text: TextSpan(
+                          children: [
+                            WidgetSpan(
+                              child: Icon(Icons.save_alt, size: 20),
+                            ),
+                            TextSpan(
+                              text: " Simpan",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Color.fromARGB(255, 255, 255, 255),
+                              ),
+                              //         " KM",
+                            ),
+                          ],
                         ),
                       ),
                     ),
@@ -462,16 +473,6 @@ class MyEditState extends State<MyEdit> {
       'maksud': maksud,
       'uang_saku': tot_uangsaku,
     };
-    // print("id_perdin " + id_perdin);
-    // print("nrp pegawai " + nrp_pegawai);
-    // print("lokasi_id_asal " + id_kota_asal);
-    // print("lokasi_id_tujuan " + id_kota_tujuan);
-    // print("jarak " + jarak_km);
-    // print("tanggal_berangkat " + tglberangkat);
-    // print("tanggal_pulang " + tglpulang);
-    // print("lama_hari " + durasi_perdin);
-    // print("maskud " + maksud);
-    // print("uang_saku " + uangsaku);
 
     var response = await Network().editPerdin(data, '/trx/perdin/' + id_perdin);
 

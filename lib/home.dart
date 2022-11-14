@@ -6,9 +6,8 @@ import 'package:first_1/network/api.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'main.dart';
 import 'add_perdin.dart';
-
+import 'package:intl/intl.dart';
 // import 'edit_perdin.dart';
-
 
 class MyHome extends StatefulWidget {
   const MyHome({super.key});
@@ -52,6 +51,9 @@ class MyHomeState extends State<MyHome> {
     ;
   }
 
+//format idr
+  final formatter = NumberFormat.simpleCurrency(locale: 'id_ID');
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -61,7 +63,7 @@ class MyHomeState extends State<MyHome> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Home Perdin'),
+          title: Text('Dashboard'),
           backgroundColor: Color.fromARGB(255, 0, 0, 0),
           actions: [
             TextButton.icon(
@@ -93,7 +95,8 @@ class MyHomeState extends State<MyHome> {
                           child: Text(
                             _get[index]['nama_pegawai'],
                             style: TextStyle(
-                              fontSize: 20,
+                              fontSize: 30,
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
                         ),
@@ -104,6 +107,7 @@ class MyHomeState extends State<MyHome> {
                         Container(
                           margin: const EdgeInsets.only(left: 10.0, top: 5),
                           child: Text(
+                            "NIP Pegawai : " +
                             _get[index]['nip_pegawai'],
                             style: TextStyle(
                               fontSize: 10,
@@ -128,11 +132,13 @@ class MyHomeState extends State<MyHome> {
                     Row(
                       children: [
                         Container(
-                          margin: const EdgeInsets.only(left: 10.0, top: 10),
+                          margin: const EdgeInsets.only(
+                              left: 10.0, top: 10, bottom: 10),
                           child: Text(
                             "Detail Perdin :",
                             style: TextStyle(
-                              fontSize: 15,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
                         )
@@ -141,56 +147,74 @@ class MyHomeState extends State<MyHome> {
                     Row(
                       children: [
                         Container(
-                          margin: const EdgeInsets.only(
-                              left: 10.0, bottom: 10.0, top: 10),
-                          child: Text(
-                            "Kota Asal : " + _get[index]['lokasi_asal'],
-                            style: TextStyle(
-                              fontSize: 12,
+                            margin: const EdgeInsets.only(
+                              left: 10.0,
+                              bottom: 10.0,
                             ),
-                          ),
-                        )
+                            child: RichText(
+                              text: TextSpan(
+                                children: [
+                                  WidgetSpan(
+                                    child: Icon(Icons.location_city, size: 20),
+                                  ),
+                                  TextSpan(
+                                    text: " Kota Tujuan : " +
+                                        _get[index]['lokasi_asal'],
+                                  ),
+                                ],
+                              ),
+                            ))
                       ],
                     ),
                     Row(
                       children: [
                         Container(
-                          margin: const EdgeInsets.only(
-                            left: 10.0,
-                            bottom: 10.0,
-                          ),
-                          child: Text(
-                            "Kota Tujuan : " + _get[index]['lokasi_tujuan'],
-                            style: TextStyle(
-                              fontSize: 12,
+                            margin: const EdgeInsets.only(
+                              left: 10.0,
+                              bottom: 10.0,
                             ),
-                          ),
-                        )
+                            child: RichText(
+                              text: TextSpan(
+                                children: [
+                                  WidgetSpan(
+                                    child: Icon(Icons.location_city, size: 20),
+                                  ),
+                                  TextSpan(
+                                    text: " Kota Tujuan : " +
+                                        _get[index]['lokasi_tujuan'],
+                                  ),
+                                ],
+                              ),
+                            ))
                       ],
                     ),
                     Row(
                       children: [
                         Container(
-                          margin: const EdgeInsets.only(
-                            left: 10.0,
-                            bottom: 10.0,
-                          ),
-                          child: Text(
-                            "Tanggal : ",
-                            style: TextStyle(
-                              fontSize: 12,
+                            margin: const EdgeInsets.only(
+                              left: 10.0,
+                              bottom: 10.0,
                             ),
-                          ),
-                        ),
+                            child: RichText(
+                              text: TextSpan(
+                                children: [
+                                  WidgetSpan(
+                                    child: Icon(Icons.date_range, size: 20),
+                                  ),
+                                  TextSpan(text: " Tanggal : "),
+                                ],
+                              ),
+                            )),
                         Container(
                           margin: const EdgeInsets.only(
                             left: 0,
                             bottom: 10.0,
+                            top: 5.0,
                           ),
                           child: Text(
                             _get[index]['tanggal_berangkat'],
                             style: TextStyle(
-                              fontSize: 12,
+                              fontSize: 15,
                             ),
                           ),
                         ),
@@ -199,11 +223,12 @@ class MyHomeState extends State<MyHome> {
                             left: 5,
                             right: 5,
                             bottom: 10.0,
+                            top: 5.0,
                           ),
                           child: Text(
                             "-->",
                             style: TextStyle(
-                              fontSize: 12,
+                              fontSize: 15,
                             ),
                           ),
                         ),
@@ -211,11 +236,12 @@ class MyHomeState extends State<MyHome> {
                           margin: const EdgeInsets.only(
                             left: 0,
                             bottom: 10.0,
+                            top: 5.0,
                           ),
                           child: Text(
                             _get[index]['tanggal_pulang'],
                             style: TextStyle(
-                              fontSize: 12,
+                              fontSize: 15,
                             ),
                           ),
                         ),
@@ -224,65 +250,97 @@ class MyHomeState extends State<MyHome> {
                     Row(
                       children: [
                         Container(
-                          margin: const EdgeInsets.only(
-                            left: 10.0,
-                            bottom: 10.0,
-                          ),
-                          child: Text(
-                            "Lama : " + _get[index]['lama_hari'] + " hari",
-                            style: TextStyle(
-                              fontSize: 12,
+                            margin: const EdgeInsets.only(
+                              left: 10.0,
+                              bottom: 10.0,
                             ),
-                          ),
-                        )
+                            child: RichText(
+                              text: TextSpan(
+                                children: [
+                                  WidgetSpan(
+                                    child: Icon(Icons.lock_clock, size: 20),
+                                  ),
+                                  TextSpan(
+                                    text: " Lama Hari : " +
+                                        _get[index]['lama_hari'] +
+                                        " Hari",
+                                  ),
+                                ],
+                              ),
+                            ))
                       ],
                     ),
                     Row(
                       children: [
                         Container(
-                          margin: const EdgeInsets.only(
-                            left: 10.0,
-                            bottom: 10.0,
-                          ),
-                          child: Text(
-                            "Uang Saku : Rp." + _get[index]['uang_saku'],
-                            style: TextStyle(
-                              fontSize: 12,
+                            margin: const EdgeInsets.only(
+                              left: 10.0,
+                              bottom: 10.0,
                             ),
-                          ),
-                        )
+                            child: RichText(
+                              text: TextSpan(
+                                children: [
+                                  WidgetSpan(
+                                    child: Icon(Icons.money, size: 20),
+                                  ),
+                                  TextSpan(
+                                    text: " Uang Saku : " +
+                                        formatter.format(int.parse(
+                                            _get[index]['uang_saku'])),
+                                  ),
+                                ],
+                              ),
+                            ))
                       ],
                     ),
                     Row(
                       children: [
                         Container(
-                          margin: const EdgeInsets.only(
-                            left: 10.0,
-                            bottom: 10.0,
-                          ),
-                          child: Text(
-                            "Jarak : " + _get[index]['jarak'] + " KM",
-                            style: TextStyle(
-                              fontSize: 12,
+                            margin: const EdgeInsets.only(
+                              left: 10.0,
+                              bottom: 10.0,
                             ),
-                          ),
-                        )
+                            child: 
+                            RichText(
+                              text: TextSpan(
+                                children: [
+                                  WidgetSpan(
+                                    child: Icon(Icons.location_pin, size: 20),
+                                  ),
+                                  TextSpan(
+                                      text: " Jarak : " +
+                                          _get[index]['jarak']?.replaceFirst(
+                                              RegExp(r"\.[^]*"), "") +
+                                          " KM"
+                                      //         " KM",
+                                      ),
+                                ],
+                              ),
+                            )
+                            )
                       ],
                     ),
                     Row(
                       children: [
                         Container(
-                          margin: const EdgeInsets.only(
-                            left: 10.0,
-                            bottom: 10.0,
-                          ),
-                          child: Text(
-                            "Maksud : " + _get[index]['maksud'],
-                            style: TextStyle(
-                              fontSize: 12,
+                            margin: const EdgeInsets.only(
+                              left: 10.0,
+                              bottom: 10.0,
                             ),
-                          ),
-                        )
+                            child: RichText(
+                              text: TextSpan(
+                                children: [
+                                  WidgetSpan(
+                                    child: Icon(Icons.sticky_note_2_outlined,
+                                        size: 20),
+                                  ),
+                                  TextSpan(
+                                      text: " Maksud : " + _get[index]['maksud']
+                                      //         " KM",
+                                      ),
+                                ],
+                              ),
+                            ))
                       ],
                     ),
                     Row(children: [
@@ -322,10 +380,6 @@ class MyHomeState extends State<MyHome> {
                             backgroundColor: Colors.red,
                             child: IconButton(
                                 color: Colors.white,
-                                // onPressed: () {
-                                //   deletePerdin((_get[index]['id']).toString());
-                                //   print(_get[index]['id']);
-                                // },
                                 onPressed: () => showDialog<String>(
                                       context: context,
                                       builder: (BuildContext context) =>
@@ -352,6 +406,7 @@ class MyHomeState extends State<MyHome> {
                                 icon: const Icon(Icons.delete))),
                       ),
                     ]),
+             
                   ],
                 ),
               );

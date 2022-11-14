@@ -49,7 +49,7 @@ class MyLoginFormState extends State<MyLoginForm> {
               child: Column(children: [
                 SizedBox(height: 50),
                 Text(
-                  "Login",
+                  "App",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 40,
@@ -90,12 +90,12 @@ class MyLoginFormState extends State<MyLoginForm> {
                     password = passwordValue;
                   },
                 ),
-                SizedBox(height: 20),
+                SizedBox(height: 40),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Color.fromARGB(255, 0, 67, 249),
                     onPrimary: Colors.white,
-                    minimumSize: Size(300, 50), //////// HERE
+                    minimumSize: Size(150, 50), //////// HERE
                   ),
                   // style: ButtonStyle(
                   // backgroundColor: MaterialStateProperty.all<Color>(Color.fromARGB(255, 0, 0, 0)),
