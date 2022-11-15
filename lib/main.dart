@@ -60,9 +60,9 @@ class MyLoginFormState extends State<MyLoginForm> {
                 //form username
                 TextFormField(
                   decoration: new InputDecoration(
+                    prefixIcon: Icon(Icons.people),
                     hintText: "Masukan Username ",
                     labelText: "Username",
-                    icon: Icon(Icons.people),
                     border: OutlineInputBorder(
                         borderRadius: new BorderRadius.circular(5.0)),
                   ),
@@ -76,10 +76,11 @@ class MyLoginFormState extends State<MyLoginForm> {
                 SizedBox(height: 20),
                 //form username
                 TextFormField(
+                  obscureText: true,
                   decoration: new InputDecoration(
+                    prefixIcon: Icon(Icons.key),
                     hintText: "Masukkan Password ",
                     labelText: "Password",
-                    icon: Icon(Icons.key),
                     border: OutlineInputBorder(
                         borderRadius: new BorderRadius.circular(5.0)),
                   ),
@@ -91,6 +92,10 @@ class MyLoginFormState extends State<MyLoginForm> {
                   },
                 ),
                 SizedBox(height: 40),
+                Divider(
+                  height: 5.0,
+                ),
+                SizedBox(height: 20),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Color.fromARGB(255, 0, 67, 249),

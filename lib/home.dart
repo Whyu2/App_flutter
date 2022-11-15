@@ -221,14 +221,20 @@ class MyHomeState extends State<MyHome> {
                         ),
                         Container(
                           margin: const EdgeInsets.only(
-                            left: 5,
-                            right: 5,
+                            left: 1,
+                            right: 1,
                             bottom: 10.0,
                             top: 5.0,
                           ),
-                          child: Text(
-                            "-->",
-                            style: TextStyle(),
+                          child: RichText(
+                            text: TextSpan(
+                              children: [
+                                WidgetSpan(
+                                  child: Icon(Icons.arrow_forward_outlined,
+                                      size: 20),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                         Container(
@@ -430,9 +436,14 @@ class MyHomeState extends State<MyHome> {
             add_perdin();
           },
           backgroundColor: Color.fromARGB(255, 1, 1, 1),
-          child: Text(
-            "+",
-            style: TextStyle(fontSize: 20),
+          child: RichText(
+            text: TextSpan(
+              children: [
+                WidgetSpan(
+                  child: Icon(Icons.add, size: 25),
+                ),
+              ],
+            ),
           ),
         ),
       ),
