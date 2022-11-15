@@ -91,13 +91,17 @@ class MyLoginFormState extends State<MyLoginForm> {
                     password = passwordValue;
                   },
                 ),
-                SizedBox(height: 40),
+                SizedBox(height: 20),
                 Divider(
                   height: 5.0,
                 ),
                 SizedBox(height: 20),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(25),
+                    ),
+                    // elevation: 10.0,
                     backgroundColor: Color.fromARGB(255, 0, 67, 249),
                     onPrimary: Colors.white,
                     minimumSize: Size(150, 50), //////// HERE

@@ -349,11 +349,14 @@ class MyHomeState extends State<MyHome> {
                     ),
                     Row(children: [
                       Container(
+                        
                         margin: const EdgeInsets.only(
                           left: 10.0,
                           bottom: 10.0,
                         ),
+                        
                         child: CircleAvatar(
+                          
                             radius: 20,
                             backgroundColor: Color.fromARGB(255, 0, 67, 249),
                             child: IconButton(
