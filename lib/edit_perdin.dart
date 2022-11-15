@@ -83,33 +83,6 @@ class MyEditState extends State<MyEdit> {
     });
   }
 
-  // dataKota1(id) async {
-  //   var response = await Network().getKota_byId('/master/lokasi/' + id);
-  //   if (response.statusCode != 200) {
-  //     print(response.statusCode);
-  //   }
-  //   var data = jsonDecode(response.body);
-  //   final pref = await SharedPreferences.getInstance();
-  //   await pref.setString('lokasi_id_asal', data["id"]);
-  //   await pref.setString('lon1', data["lon"]);
-  //   await pref.setString('lat1', data["lat"]);
-  // }
-
-  // dataKota2(id) async {
-  //   var response = await Network().getKota_byId('/master/lokasi/' + id);
-
-  //   if (response.statusCode != 200) {
-  //     print(response.statusCode);
-  //   }
-  //   var data2 = jsonDecode(response.body);
-  //   final pref = await SharedPreferences.getInstance();
-  //   await pref.setString('lokasi_id_tujuan', data2["id"]);
-  //   await pref.setString('lon2', data2["lon"]);
-  //   await pref.setString('lat2', data2["lat"]);
-  // }
-
-  // final formatter = NumberFormat.simpleCurrency(locale: 'id_ID');
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -183,26 +156,67 @@ class MyEditState extends State<MyEdit> {
               ),
 
               SizedBox(height: 20),
-
-              //Data Pegawai
-              //form username
-              DropdownSearch<dynamic>(
+              DropdownSearch<Pegawai>(
                 mode: Mode.MENU,
-                showSearchBox: true,
+                // label: "Pilih Kota Asal",
+                hint: "Daftar Pegawai",
                 onFind: (text) async {
                   var response =
                       await Network().getPegawai('/master/pegawai/list');
-                  if (response.statusCode != 200) {}
+                  if (response.statusCode != 200) {
+                    print(response.statusCode);
+                  }
                   List allPegawai = (json.decode(response.body)
                       as Map<String, dynamic>)["data"];
-
-                  return allPegawai as List<dynamic>;
+                  List<Pegawai> allNamaPegawawi = [];
+                  allPegawai.forEach((element) {
+                    allNamaPegawawi.add(Pegawai(
+                        unitKerja: element["unitKerja"],
+                        nama: element["nama"],
+                        nip: element["nip"],
+                        updatedAt: element["updatedAt"],
+                        jabatan: element["jabatan"],
+                        createdAt: element["createdAt"],
+                        nrp: element["nrp"],
+                        deletedAt: element["deletedAt"],
+                        email: element["email"],
+                        tanggalLahir: element["tanggalLahir"],
+                       ));
+                  });
+                  return allNamaPegawawi;
                 },
-                // onChanged: (value) => print(value['nrp']),
-                onChanged: (value) => nrp_pegawai = value['nrp'],
-                selectedItem: {"nama": nama_pegawai},
-                itemAsString: ((item) => item['nama']),
+                popupItemBuilder: (context, item, isSelected) => ListTile(
+                  title: Text(item.nama),
+                ),
+                dropdownBuilder: (context, selectedItem) => Text(
+                  selectedItem?.nama ?? nama_pegawai,
+                ),
+
+                onChanged: (value) {
+                  setState(() {
+                    nrp_pegawai = value?.nrp;
+                  });
+                },
               ),
+              //Data Pegawai
+              //form username
+              // DropdownSearch<dynamic>(
+              //   mode: Mode.MENU,
+              //   showSearchBox: true,
+              //   onFind: (text) async {
+              //     var response =
+              //         await Network().getPegawai('/master/pegawai/list');
+              //     if (response.statusCode != 200) {}
+              //     List allPegawai = (json.decode(response.body)
+              //         as Map<String, dynamic>)["data"];
+
+              //     return allPegawai as List<dynamic>;
+              //   },
+              //   // onChanged: (value) => print(value['nrp']),
+              //   onChanged: (value) => nrp_pegawai = value['nrp'],
+              //   selectedItem: {"nama": nama_pegawai},
+              //   itemAsString: ((item) => item['nama']),
+              // ),
               SizedBox(height: 10),
               //Data Kota Asal
               DropdownSearch<Kota>(
@@ -530,12 +544,6 @@ class MyEditState extends State<MyEdit> {
 
   void kembali() async {
     SharedPreferences localStorage = await SharedPreferences.getInstance();
-    // localStorage.remove('lat1');
-    // localStorage.remove('lon1');
-    // localStorage.remove('lon2');
-    // localStorage.remove('lat2');
-    // localStorage.remove('lokasi_id_asal');
-    // localStorage.remove('lokasi_id_tujuan');
     Navigator.pushReplacement(
         context, MaterialPageRoute(builder: (context) => MyHome()));
   }

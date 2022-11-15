@@ -362,7 +362,7 @@ class MyHomeState extends State<MyHome> {
                                   );
                                   localStorage.setString('lokasi_asal',
                                       _get[index]['lokasi_asal']);
-                                         localStorage.setString('nama_pegawai',
+                                  localStorage.setString('nama_pegawai',
                                       _get[index]['nama_pegawai']);
                                   localStorage.setString('lokasi_id_asal',
                                       _get[index]['lokasi_id_asal']);
@@ -443,6 +443,20 @@ class MyHomeState extends State<MyHome> {
     SharedPreferences localStorage = await SharedPreferences.getInstance();
     localStorage.remove('name');
     localStorage.remove('id');
+    localStorage.remove('nrp_pegawai');
+    localStorage.remove('nama_pegawai');
+    localStorage.remove('lokasi_asal');
+    localStorage.remove('lokasi_tujuan');
+    localStorage.remove('tanggal_berangkat');
+    localStorage.remove('tanggal_pulang');
+    localStorage.remove('maksud');
+    localStorage.remove('id_perdin');
+    localStorage.remove('lat1');
+    localStorage.remove('lon1');
+    localStorage.remove('lon2');
+    localStorage.remove('lat2');
+    localStorage.remove('lokasi_id_asal');
+    localStorage.remove('lokasi_id_tujuan');
     Navigator.pushReplacement(
         context, MaterialPageRoute(builder: (context) => MyApp()));
   }
