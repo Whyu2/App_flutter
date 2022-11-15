@@ -147,7 +147,7 @@ class MyHomeState extends State<MyHome> {
                                   children: [
                                     WidgetSpan(
                                       child:
-                                          Icon(Icons.location_city, size: 25),
+                                          Icon(Icons.location_city, size: 35),
                                     ),
                                     TextSpan(
                                       text: " Kota Asal",
@@ -158,15 +158,17 @@ class MyHomeState extends State<MyHome> {
                               ),
                             ),
                             Container(
+                              width: 100,
                               margin: const EdgeInsets.only(),
                               child: RichText(
                                 text: TextSpan(
                                   children: [
                                     TextSpan(
                                       text: _get[index]['lokasi_asal'],
-                                      
                                       style: TextStyle(
-                                          color: Colors.black, fontSize: 15,),
+                                        color: Colors.black,
+                                        fontSize: 15,
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -214,10 +216,9 @@ class MyHomeState extends State<MyHome> {
                                   children: [
                                     WidgetSpan(
                                       child:
-                                          Icon(Icons.location_city, size: 20),
+                                          Icon(Icons.location_city, size: 35),
                                     ),
                                     TextSpan(
-                                      
                                       text: " Kota Tujuan",
                                       style: TextStyle(color: Colors.black),
                                     ),
@@ -226,7 +227,7 @@ class MyHomeState extends State<MyHome> {
                               ),
                             ),
                             Container(
-                              margin: const EdgeInsets.only(),
+                              width: 100,
                               child: RichText(
                                 text: TextSpan(
                                   children: [
@@ -436,6 +437,7 @@ class MyHomeState extends State<MyHome> {
 
                               //other properties
                             ),
+                            SizedBox(height: 10),
                             ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                 shape: RoundedRectangleBorder(
@@ -447,7 +449,6 @@ class MyHomeState extends State<MyHome> {
                                 onPrimary: Colors.white,
                                 minimumSize: Size(300, 40), //////// HERE
                               ),
-
                               onPressed: () => showDialog<String>(
                                 context: context,
                                 builder: (BuildContext context) => AlertDialog(
@@ -488,10 +489,8 @@ class MyHomeState extends State<MyHome> {
                                   ],
                                 ),
                               ),
-
-                              //other properties
                             ),
-                            SizedBox(height: 5),
+                            SizedBox(height: 20),
                           ],
                         )
                       ],

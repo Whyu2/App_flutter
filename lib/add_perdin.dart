@@ -156,8 +156,8 @@ class MyPerdinFormState extends State<MyPerdinForm> {
               //Data Kota Asal
               DropdownSearch<Kota>(
                 mode: Mode.MENU,
-                // label: "Pilih Kota Asal",
-                hint: "Daftar Kota",
+                label: "Pilih Kota Asal",
+                hint: "Daftar Kota Asal",
                 onFind: (text) async {
                   // var response = await http.get(
                   //     "http://libra.akhdani.net:54125/api/master/lokasi/list?limit=200&offset=0");
@@ -204,8 +204,8 @@ class MyPerdinFormState extends State<MyPerdinForm> {
               //Data Kota Tujuan
               DropdownSearch<Kota>(
                 mode: Mode.MENU,
-                // label: "Pilih Kota Asal",
-                hint: "Daftar Kota",
+                label: "Pilih Kota Tujuan",
+                hint: "Daftar Kota Tujuan",
                 onFind: (text) async {
                   // var response = await http.get(
                   //     "http://libra.akhdani.net:54125/api/master/lokasi/list?limit=200&offset=0");

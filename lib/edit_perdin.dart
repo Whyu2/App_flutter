@@ -161,7 +161,7 @@ class MyEditState extends State<MyEdit> {
               SizedBox(height: 20),
               DropdownSearch<Pegawai>(
                 mode: Mode.MENU,
-                // label: "Pilih Kota Asal",
+                label: "Pilih Pegawai",
                 hint: "Daftar Pegawai",
                 onFind: (text) async {
                   var response =
@@ -194,7 +194,6 @@ class MyEditState extends State<MyEdit> {
                 dropdownBuilder: (context, selectedItem) => Text(
                   selectedItem?.nama ?? nama_pegawai,
                 ),
-
                 onChanged: (value) {
                   setState(() {
                     nrp_pegawai = value?.nrp;
@@ -224,8 +223,8 @@ class MyEditState extends State<MyEdit> {
               //Data Kota Asal
               DropdownSearch<Kota>(
                 mode: Mode.MENU,
-                // label: "Pilih Kota Asal",
-                hint: "Daftar Kota",
+                label: "Pilih Kota Asal",
+                hint: "Daftar Kota Asal",
                 onFind: (text) async {
                   var response = await Network()
                       .getKota('/master/lokasi/list?limit=200&offset=0');
@@ -259,7 +258,6 @@ class MyEditState extends State<MyEdit> {
                 dropdownBuilder: (context, selectedItem) => Text(
                   selectedItem?.nama ?? kota_asal,
                 ),
-
                 onChanged: (value) {
                   setState(() {
                     id_kota_asal = value?.id;
@@ -272,8 +270,8 @@ class MyEditState extends State<MyEdit> {
               //Data Kota Tujuan
               DropdownSearch<Kota>(
                 mode: Mode.MENU,
-                // label: "Pilih Kota Asal",
-                hint: "Daftar Kota",
+                label: "Pilih Kota Tujuan",
+                hint: "Daftar Kota Tujuan",
                 onFind: (text) async {
                   var response = await Network()
                       .getKota('/master/lokasi/list?limit=200&offset=0');
