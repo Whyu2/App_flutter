@@ -99,10 +99,10 @@ class MyLoginFormState extends State<MyLoginForm> {
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(25),
+                      borderRadius: BorderRadius.circular(10),
                     ),
                     // elevation: 10.0,
-                    backgroundColor: Color.fromARGB(255, 0, 67, 249),
+                    backgroundColor: Color.fromARGB(255, 0, 0, 0),
                     onPrimary: Colors.white,
                     minimumSize: Size(150, 50), //////// HERE
                   ),

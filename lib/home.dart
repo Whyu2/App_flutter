@@ -86,6 +86,12 @@ class MyHomeState extends State<MyHome> {
             itemCount: _get.length,
             itemBuilder: (context, index) {
               return Card(
+                shape: RoundedRectangleBorder(
+                  //<-- SEE HERE
+                  side: BorderSide(
+                    color: Color.fromARGB(255, 143, 143, 143),
+                  ),
+                ),
                 child: Column(
                   children: [
                     Row(
@@ -95,7 +101,7 @@ class MyHomeState extends State<MyHome> {
                           child: Text(
                             _get[index]['nama_pegawai'],
                             style: TextStyle(
-                                fontSize: 30,
+                                fontSize: 20,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.black),
                           ),
@@ -107,20 +113,7 @@ class MyHomeState extends State<MyHome> {
                         Container(
                           margin: const EdgeInsets.only(left: 10.0, top: 5),
                           child: Text(
-                            "NIP Pegawai : " + _get[index]['nip_pegawai'],
-                            style: TextStyle(
-                              fontSize: 10,
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Container(
-                          margin: const EdgeInsets.only(left: 10.0, top: 10),
-                          child: Text(
-                            "Diajukan Oleh : " + _get[index]['created_by_nama'],
+                            _get[index]['nip_pegawai'],
                             style: TextStyle(
                               fontSize: 10,
                             ),
@@ -134,60 +127,123 @@ class MyHomeState extends State<MyHome> {
                           margin: const EdgeInsets.only(
                               left: 10.0, top: 10, bottom: 10),
                           child: Text(
-                            "Detail Perdin :",
+                            "Diajukan : " + _get[index]['created_by_nama'],
                             style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
+                              fontSize: 10,
                             ),
                           ),
                         )
                       ],
                     ),
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Container(
-                            margin: const EdgeInsets.only(
-                              left: 10.0,
-                              bottom: 10.0,
-                            ),
-                            child: RichText(
-                              text: TextSpan(
-                                children: [
-                                  WidgetSpan(
-                                    child: Icon(Icons.location_city, size: 20),
-                                  ),
-                                  TextSpan(
-                                    text: " Kota Asal : " +
-                                        _get[index]['lokasi_asal'],
-                                    style: TextStyle(color: Colors.black),
-                                  ),
-                                ],
+                        Column(
+                          children: [
+                            Container(
+                              margin: const EdgeInsets.only(),
+                              child: RichText(
+                                text: TextSpan(
+                                  children: [
+                                    WidgetSpan(
+                                      child:
+                                          Icon(Icons.location_city, size: 25),
+                                    ),
+                                    TextSpan(
+                                      text: " Kota Asal",
+                                      style: TextStyle(color: Colors.black),
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ))
+                            ),
+                            Container(
+                              margin: const EdgeInsets.only(),
+                              child: RichText(
+                                text: TextSpan(
+                                  children: [
+                                    TextSpan(
+                                      text: _get[index]['lokasi_asal'],
+                                      
+                                      style: TextStyle(
+                                          color: Colors.black, fontSize: 15,),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            Container(
+                              margin: const EdgeInsets.only(
+                                left: 10.0,
+                                right: 10.0,
+                              ),
+                              child: RichText(
+                                text: TextSpan(
+                                  children: [
+                                    WidgetSpan(
+                                        child: Column(
+                                      children: [
+                                        Text(
+                                            "(" +
+                                                _get[index]['jarak']
+                                                    ?.replaceFirst(
+                                                        RegExp(r"\.[^]*"), "") +
+                                                " KM" +
+                                                ")",
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 10))
+                                      ],
+                                    )),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            Container(
+                              margin: const EdgeInsets.only(),
+                              child: RichText(
+                                text: TextSpan(
+                                  children: [
+                                    WidgetSpan(
+                                      child:
+                                          Icon(Icons.location_city, size: 20),
+                                    ),
+                                    TextSpan(
+                                      
+                                      text: " Kota Tujuan",
+                                      style: TextStyle(color: Colors.black),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Container(
+                              margin: const EdgeInsets.only(),
+                              child: RichText(
+                                text: TextSpan(
+                                  children: [
+                                    TextSpan(
+                                      text: _get[index]['lokasi_tujuan'],
+                                      style: TextStyle(
+                                          color: Colors.black, fontSize: 15),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ],
                     ),
-                    Row(
-                      children: [
-                        Container(
-                            margin: const EdgeInsets.only(
-                              left: 10.0,
-                              bottom: 10.0,
-                            ),
-                            child: RichText(
-                              text: TextSpan(
-                                children: [
-                                  WidgetSpan(
-                                    child: Icon(Icons.location_city, size: 20),
-                                  ),
-                                  TextSpan(
-                                      text: " Kota Tujuan : " +
-                                          _get[index]['lokasi_tujuan'],
-                                      style: TextStyle(color: Colors.black)),
-                                ],
-                              ),
-                            ))
-                      ],
-                    ),
+                    SizedBox(height: 20),
                     Row(
                       children: [
                         Container(
@@ -201,10 +257,10 @@ class MyHomeState extends State<MyHome> {
                                   WidgetSpan(
                                     child: Icon(Icons.date_range, size: 20),
                                   ),
-                                  TextSpan(
-                                    text: " Tanggal : ",
-                                    style: TextStyle(color: Colors.black),
-                                  ),
+                                  // TextSpan(
+                                  //   text: " Tanggal : ",
+                                  //   style: TextStyle(color: Colors.black),
+                                  // ),
                                 ],
                               ),
                             )),
@@ -215,8 +271,8 @@ class MyHomeState extends State<MyHome> {
                             top: 5.0,
                           ),
                           child: Text(
-                            _get[index]['tanggal_berangkat'],
-                            style: TextStyle(),
+                            " " + _get[index]['tanggal_berangkat'],
+                            style: TextStyle(fontSize: 10),
                           ),
                         ),
                         Container(
@@ -230,8 +286,7 @@ class MyHomeState extends State<MyHome> {
                             text: TextSpan(
                               children: [
                                 WidgetSpan(
-                                  child: Icon(Icons.arrow_forward_outlined,
-                                      size: 20),
+                                  child: Text("-"),
                                 ),
                               ],
                             ),
@@ -244,35 +299,24 @@ class MyHomeState extends State<MyHome> {
                             top: 5.0,
                           ),
                           child: Text(
-                            _get[index]['tanggal_pulang'],
-                            style: TextStyle(),
+                            " " + _get[index]['tanggal_pulang'],
+                            style: TextStyle(fontSize: 10),
+                          ),
+                        ),
+                        Container(
+                          margin: const EdgeInsets.only(
+                            left: 0,
+                            bottom: 10.0,
+                            top: 5.0,
+                          ),
+                          child: Text(
+                            " (" + _get[index]['lama_hari'] + " Hari" + ")",
+                            style: TextStyle(fontSize: 10, color: Colors.black),
                           ),
                         ),
                       ],
                     ),
-                    Row(
-                      children: [
-                        Container(
-                            margin: const EdgeInsets.only(
-                              left: 10.0,
-                              bottom: 10.0,
-                            ),
-                            child: RichText(
-                              text: TextSpan(
-                                children: [
-                                  WidgetSpan(
-                                    child: Icon(Icons.lock_clock, size: 20),
-                                  ),
-                                  TextSpan(
-                                      text: " Lama Hari : " +
-                                          _get[index]['lama_hari'] +
-                                          " Hari",
-                                      style: TextStyle(color: Colors.black)),
-                                ],
-                              ),
-                            ))
-                      ],
-                    ),
+
                     Row(
                       children: [
                         Container(
@@ -287,7 +331,7 @@ class MyHomeState extends State<MyHome> {
                                     child: Icon(Icons.money, size: 20),
                                   ),
                                   TextSpan(
-                                      text: " Uang Saku : " +
+                                      text: " " +
                                           formatter.format(int.parse(
                                               _get[index]['uang_saku'])),
                                       style: TextStyle(color: Colors.black)),
@@ -301,33 +345,7 @@ class MyHomeState extends State<MyHome> {
                         Container(
                             margin: const EdgeInsets.only(
                               left: 10.0,
-                              bottom: 10.0,
-                            ),
-                            child: RichText(
-                              text: TextSpan(
-                                children: [
-                                  WidgetSpan(
-                                    child: Icon(Icons.location_pin, size: 20),
-                                  ),
-                                  TextSpan(
-                                      text: " Jarak : " +
-                                          _get[index]['jarak']?.replaceFirst(
-                                              RegExp(r"\.[^]*"), "") +
-                                          " KM",
-                                      style: TextStyle(color: Colors.black)
-                                      //         " KM",
-                                      ),
-                                ],
-                              ),
-                            ))
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Container(
-                            margin: const EdgeInsets.only(
-                              left: 10.0,
-                              bottom: 10.0,
+                              bottom: 30.0,
                             ),
                             child: RichText(
                               text: TextSpan(
@@ -337,8 +355,7 @@ class MyHomeState extends State<MyHome> {
                                         size: 20),
                                   ),
                                   TextSpan(
-                                      text:
-                                          " Maksud : " + _get[index]['maksud'],
+                                      text: " " + _get[index]['maksud'],
                                       style: TextStyle(color: Colors.black)
                                       //         " KM",
                                       ),
@@ -347,89 +364,222 @@ class MyHomeState extends State<MyHome> {
                             ))
                       ],
                     ),
-                    Row(children: [
-                      Container(
-                        
-                        margin: const EdgeInsets.only(
-                          left: 10.0,
-                          bottom: 10.0,
-                        ),
-                        
-                        child: CircleAvatar(
-                          
-                            radius: 20,
-                            backgroundColor: Color.fromARGB(255, 0, 67, 249),
-                            child: IconButton(
-                                color: Colors.white,
-                                onPressed: () async {
-                                  SharedPreferences localStorage =
-                                      await SharedPreferences.getInstance();
-                                  // localStorage.setString('token', json.encode(body['token']));
-                                  localStorage.setString(
-                                    'nrp_pegawai',
-                                    _get[index]['nrp'],
-                                  );
-                                  localStorage.setString('lokasi_asal',
-                                      _get[index]['lokasi_asal']);
-                                  localStorage.setString('nama_pegawai',
-                                      _get[index]['nama_pegawai']);
-                                  localStorage.setString('lokasi_id_asal',
-                                      _get[index]['lokasi_id_asal']);
-                                  localStorage.setString('lokasi_tujuan',
-                                      _get[index]['lokasi_tujuan']);
-                                  localStorage.setString('lokasi_id_tujuan',
-                                      _get[index]['lokasi_id_tujuan']);
-                                  localStorage.setString('tanggal_berangkat',
-                                      _get[index]['tanggal_berangkat']);
-                                  localStorage.setString('tanggal_pulang',
-                                      _get[index]['tanggal_pulang']);
-                                  localStorage.setString(
-                                      'maksud', _get[index]['maksud']);
-                                  localStorage.setString(
-                                      'id_perdin', _get[index]['id']);
-                                  Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => MyEdit()));
-                                },
-                                icon: const Icon(Icons.edit))),
-                      ),
-                      Container(
-                        margin: const EdgeInsets.only(
-                          left: 10.0,
-                          bottom: 10.0,
-                        ),
-                        child: CircleAvatar(
-                            radius: 20,
-                            backgroundColor: Colors.red,
-                            child: IconButton(
-                                color: Colors.white,
-                                onPressed: () => showDialog<String>(
-                                      context: context,
-                                      builder: (BuildContext context) =>
-                                          AlertDialog(
-                                        title: const Text('Hapus'),
-                                        content: const Text('Yakin Hapus ?'),
-                                        actions: <Widget>[
-                                          TextButton(
-                                            onPressed: () =>
-                                                Navigator.pop(context, 'Batal'),
-                                            child: const Text('Batal'),
-                                          ),
-                                          TextButton(
-                                            onPressed: () {
-                                              deletePerdin((_get[index]['id'])
-                                                  .toString());
-                                              Navigator.pop(context);
-                                            },
-                                            child: const Text('Ok'),
-                                          ),
-                                        ],
-                                      ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Column(
+                          children: [
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                // elevation: 10.0,
+                                backgroundColor:
+                                    Color.fromARGB(255, 0, 67, 249),
+                                onPrimary: Colors.white,
+                                minimumSize: Size(300, 40), //////// HERE
+                              ),
+
+                              // style: ButtonStyle(
+                              // backgroundColor: MaterialStateProperty.all<Color>(Color.fromARGB(255, 0, 0, 0)),
+                              // ),
+                              onPressed: () async {
+                                SharedPreferences localStorage =
+                                    await SharedPreferences.getInstance();
+                                // localStorage.setString('token', json.encode(body['token']));
+                                localStorage.setString(
+                                  'nrp_pegawai',
+                                  _get[index]['nrp'],
+                                );
+                                localStorage.setString(
+                                    'lokasi_asal', _get[index]['lokasi_asal']);
+                                localStorage.setString('nama_pegawai',
+                                    _get[index]['nama_pegawai']);
+                                localStorage.setString('lokasi_id_asal',
+                                    _get[index]['lokasi_id_asal']);
+                                localStorage.setString('lokasi_tujuan',
+                                    _get[index]['lokasi_tujuan']);
+                                localStorage.setString('lokasi_id_tujuan',
+                                    _get[index]['lokasi_id_tujuan']);
+                                localStorage.setString('tanggal_berangkat',
+                                    _get[index]['tanggal_berangkat']);
+                                localStorage.setString('tanggal_pulang',
+                                    _get[index]['tanggal_pulang']);
+                                localStorage.setString(
+                                    'maksud', _get[index]['maksud']);
+                                localStorage.setString(
+                                    'id_perdin', _get[index]['id']);
+                                Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => MyEdit()));
+                              },
+                              child: RichText(
+                                text: TextSpan(
+                                  children: [
+                                    WidgetSpan(
+                                      child: Icon(Icons.save_alt, size: 20),
                                     ),
-                                icon: const Icon(Icons.delete))),
-                      ),
-                    ]),
+                                    TextSpan(
+                                      text: " Edit",
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color:
+                                            Color.fromARGB(255, 255, 255, 255),
+                                      ),
+                                      //         " KM",
+                                    ),
+                                  ],
+                                ),
+                              ),
+
+                              //other properties
+                            ),
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                // elevation: 10.0,
+                                backgroundColor:
+                                    Color.fromARGB(255, 255, 16, 16),
+                                onPrimary: Colors.white,
+                                minimumSize: Size(300, 40), //////// HERE
+                              ),
+
+                              onPressed: () => showDialog<String>(
+                                context: context,
+                                builder: (BuildContext context) => AlertDialog(
+                                  title: const Text('Hapus'),
+                                  content: const Text('Yakin Hapus ?'),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      onPressed: () =>
+                                          Navigator.pop(context, 'Batal'),
+                                      child: const Text('Batal'),
+                                    ),
+                                    TextButton(
+                                      onPressed: () {
+                                        deletePerdin(
+                                            (_get[index]['id']).toString());
+                                        Navigator.pop(context);
+                                      },
+                                      child: const Text('Ok'),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              child: RichText(
+                                text: TextSpan(
+                                  children: [
+                                    WidgetSpan(
+                                      child: Icon(Icons.delete, size: 20),
+                                    ),
+                                    TextSpan(
+                                      text: " Hapus",
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color:
+                                            Color.fromARGB(255, 255, 255, 255),
+                                      ),
+                                      //         " KM",
+                                    ),
+                                  ],
+                                ),
+                              ),
+
+                              //other properties
+                            ),
+                            SizedBox(height: 5),
+                          ],
+                        )
+                      ],
+                    )
+
+                    // Row(children: [
+                    //   Container(
+                    //     margin: const EdgeInsets.only(
+                    //       left: 10.0,
+                    //       bottom: 10.0,
+                    //     ),
+
+                    //     child:
+
+                    //     CircleAvatar(
+                    //         radius: 20,
+                    //         backgroundColor: Color.fromARGB(255, 0, 67, 249),
+                    //         child: IconButton(
+                    //             color: Colors.white,
+                    //             onPressed: () async {
+                    //               SharedPreferences localStorage =
+                    //                   await SharedPreferences.getInstance();
+                    //               // localStorage.setString('token', json.encode(body['token']));
+                    //               localStorage.setString(
+                    //                 'nrp_pegawai',
+                    //                 _get[index]['nrp'],
+                    //               );
+                    //               localStorage.setString('lokasi_asal',
+                    //                   _get[index]['lokasi_asal']);
+                    //               localStorage.setString('nama_pegawai',
+                    //                   _get[index]['nama_pegawai']);
+                    //               localStorage.setString('lokasi_id_asal',
+                    //                   _get[index]['lokasi_id_asal']);
+                    //               localStorage.setString('lokasi_tujuan',
+                    //                   _get[index]['lokasi_tujuan']);
+                    //               localStorage.setString('lokasi_id_tujuan',
+                    //                   _get[index]['lokasi_id_tujuan']);
+                    //               localStorage.setString('tanggal_berangkat',
+                    //                   _get[index]['tanggal_berangkat']);
+                    //               localStorage.setString('tanggal_pulang',
+                    //                   _get[index]['tanggal_pulang']);
+                    //               localStorage.setString(
+                    //                   'maksud', _get[index]['maksud']);
+                    //               localStorage.setString(
+                    //                   'id_perdin', _get[index]['id']);
+                    //               Navigator.pushReplacement(
+                    //                   context,
+                    //                   MaterialPageRoute(
+                    //                       builder: (context) => MyEdit()));
+                    //             },
+                    //             icon: const Icon(Icons.edit))),
+                    //   ),
+                    //   Container(
+                    //     margin: const EdgeInsets.only(
+                    //       left: 10.0,
+                    //       bottom: 10.0,
+                    //     ),
+                    //     child: CircleAvatar(
+                    //         radius: 20,
+                    //         backgroundColor: Colors.red,
+                    //         child: IconButton(
+                    //             color: Colors.white,
+                    //             onPressed: () => showDialog<String>(
+                    //                   context: context,
+                    //                   builder: (BuildContext context) =>
+                    //                       AlertDialog(
+                    //                     title: const Text('Hapus'),
+                    //                     content: const Text('Yakin Hapus ?'),
+                    //                     actions: <Widget>[
+                    //                       TextButton(
+                    //                         onPressed: () =>
+                    //                             Navigator.pop(context, 'Batal'),
+                    //                         child: const Text('Batal'),
+                    //                       ),
+                    //                       TextButton(
+                    //                         onPressed: () {
+                    //                           deletePerdin((_get[index]['id'])
+                    //                               .toString());
+                    //                           Navigator.pop(context);
+                    //                         },
+                    //                         child: const Text('Ok'),
+                    //                       ),
+                    //                     ],
+                    //                   ),
+                    //                 ),
+                    //             icon: const Icon(Icons.delete))),
+                    //   ),
+                    // ]),
                   ],
                 ),
               );

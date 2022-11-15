@@ -125,7 +125,10 @@ class MyEditState extends State<MyEdit> {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Color.fromARGB(255, 0, 67, 249),
                         onPrimary: Colors.white,
-                        minimumSize: Size(50, 50), //////// HERE
+                        minimumSize: Size(50, 50),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ), // HERE
                       ),
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
@@ -171,17 +174,17 @@ class MyEditState extends State<MyEdit> {
                   List<Pegawai> allNamaPegawawi = [];
                   allPegawai.forEach((element) {
                     allNamaPegawawi.add(Pegawai(
-                        unitKerja: element["unitKerja"],
-                        nama: element["nama"],
-                        nip: element["nip"],
-                        updatedAt: element["updatedAt"],
-                        jabatan: element["jabatan"],
-                        createdAt: element["createdAt"],
-                        nrp: element["nrp"],
-                        deletedAt: element["deletedAt"],
-                        email: element["email"],
-                        tanggalLahir: element["tanggalLahir"],
-                       ));
+                      unitKerja: element["unitKerja"],
+                      nama: element["nama"],
+                      nip: element["nip"],
+                      updatedAt: element["updatedAt"],
+                      jabatan: element["jabatan"],
+                      createdAt: element["createdAt"],
+                      nrp: element["nrp"],
+                      deletedAt: element["deletedAt"],
+                      email: element["email"],
+                      tanggalLahir: element["tanggalLahir"],
+                    ));
                   });
                   return allNamaPegawawi;
                 },
@@ -518,11 +521,16 @@ class MyEditState extends State<MyEdit> {
         ),
         actions: [
           TextButton(
-              child: Text('Ok'),
-              onPressed: () =>
-                  Navigator.of(context, rootNavigator: true).pop()),
+            child: Text('Ok'),
+            onPressed: () {
+              Navigator.of(context, rootNavigator: true).pop();
+              Navigator.pushReplacement(
+                  context, MaterialPageRoute(builder: (context) => MyHome()));
+            },
+          ),
         ],
       );
+
       showDialog(context: context, builder: (context) => alert);
       return;
     } else {

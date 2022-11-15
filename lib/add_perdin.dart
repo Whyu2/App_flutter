@@ -95,7 +95,10 @@ class MyPerdinFormState extends State<MyPerdinForm> {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Color.fromARGB(255, 0, 67, 249),
                         onPrimary: Colors.white,
-                        minimumSize: Size(50, 50), //////// HERE
+                        minimumSize: Size(50, 50),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ), //////// HERE
                       ),
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
@@ -113,7 +116,7 @@ class MyPerdinFormState extends State<MyPerdinForm> {
                               text: " Tambah",
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                 color: Color.fromARGB(255, 255, 255, 255),
+                                color: Color.fromARGB(255, 255, 255, 255),
                               ),
                               //         " KM",
                             ),
@@ -420,9 +423,13 @@ class MyPerdinFormState extends State<MyPerdinForm> {
         ),
         actions: [
           TextButton(
-              child: Text('Ok'),
-              onPressed: () =>
-                  Navigator.of(context, rootNavigator: true).pop()),
+            child: Text('Ok'),
+            onPressed: () {
+              Navigator.of(context, rootNavigator: true).pop();
+              Navigator.pushReplacement(
+                  context, MaterialPageRoute(builder: (context) => MyHome()));
+            },
+          ),
         ],
       );
       showDialog(context: context, builder: (context) => alert);
