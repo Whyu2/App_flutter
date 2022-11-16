@@ -115,7 +115,7 @@ class MyPerdinFormState extends State<MyPerdinForm> {
                             TextSpan(
                               text: " Tambah",
                               style: TextStyle(
-                                fontWeight: FontWeight.bold,
+                                // fontWeight: FontWeight.bold,
                                 color: Color.fromARGB(255, 255, 255, 255),
                               ),
                               //         " KM",
@@ -132,7 +132,7 @@ class MyPerdinFormState extends State<MyPerdinForm> {
               //Data Pegawai
               //form username
               DropdownSearch<dynamic>(
-                mode: Mode.MENU,
+                 mode: Mode.MENU,
                 label: "Pilih Pegawai",
                 hint: "Daftar Pegawai",
                 showSearchBox: true,

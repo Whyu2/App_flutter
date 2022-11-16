@@ -57,9 +57,9 @@ class MyHomeState extends State<MyHome> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      routes: {
-        '/editPerdin': (context) => MyEdit(),
-      },
+      // routes: {
+      //   '/editPerdin': (context) => MyEdit(),
+      // },
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
@@ -88,6 +88,7 @@ class MyHomeState extends State<MyHome> {
               return Card(
                 shape: RoundedRectangleBorder(
                   //<-- SEE HERE
+                  borderRadius: BorderRadius.circular(5.0),
                   side: BorderSide(
                     color: Color.fromARGB(255, 143, 143, 143),
                   ),
@@ -273,7 +274,7 @@ class MyHomeState extends State<MyHome> {
                           ),
                           child: Text(
                             " " + _get[index]['tanggal_berangkat'],
-                            style: TextStyle(fontSize: 10),
+                            style: TextStyle(fontSize: 15),
                           ),
                         ),
                         Container(
@@ -301,7 +302,7 @@ class MyHomeState extends State<MyHome> {
                           ),
                           child: Text(
                             " " + _get[index]['tanggal_pulang'],
-                            style: TextStyle(fontSize: 10),
+                            style: TextStyle(fontSize: 15),
                           ),
                         ),
                         Container(
@@ -312,7 +313,10 @@ class MyHomeState extends State<MyHome> {
                           ),
                           child: Text(
                             " (" + _get[index]['lama_hari'] + " Hari" + ")",
-                            style: TextStyle(fontSize: 10, color: Colors.black),
+                            style: TextStyle(
+                              fontSize: 15,
+                              color: Colors.black,
+                            ),
                           ),
                         ),
                       ],
@@ -414,7 +418,10 @@ class MyHomeState extends State<MyHome> {
                                 Navigator.pushReplacement(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => MyEdit()));
+                                        builder: (
+                                      context,
+                                    ) =>
+                                            MyEdit()));
                               },
                               child: RichText(
                                 text: TextSpan(
@@ -585,7 +592,7 @@ class MyHomeState extends State<MyHome> {
             }),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            add_perdin();
+            Navigator.of(context).push(_createRoute());
           },
           backgroundColor: Color.fromARGB(255, 1, 1, 1),
           child: RichText(
@@ -599,6 +606,26 @@ class MyHomeState extends State<MyHome> {
           ),
         ),
       ),
+    );
+  }
+
+  Route _createRoute() {
+    return PageRouteBuilder(
+      pageBuilder: (context, animation, secondaryAnimation) =>
+          const MyPerdinForm(),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        var begin = Offset(0.0, 4.0);
+        var end = Offset.zero;
+        var curve = Curves.ease;
+
+        var tween =
+            Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+        return SlideTransition(
+          position: animation.drive(tween),
+          child: child,
+        );
+      },
     );
   }
 
